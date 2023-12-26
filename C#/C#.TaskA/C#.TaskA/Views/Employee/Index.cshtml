@@ -1,0 +1,45 @@
+﻿@model List<EmployeeModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Table</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        .low-hours {
+            background-color: #ffcccc;
+        }
+    </style>
+</head>
+<body>
+    <h2>Employee Table</h2>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Total Time Worked</th>
+        </tr>
+
+        @foreach (var employee in Model)
+        {
+            string rowClass = Convert.ToDouble(employee.TotalTime) < 100 ? "low-hours" : "";
+            string employeeName = @employee.EmployeeName == null ? "Employee name not provided" : @employee.EmployeeName;
+            <tr class="@rowClass">
+                <td>@employeeName</td>
+                <td>@employee.TotalTime hours</td>
+            </tr>
+        }
+    </table>
+</body>
+</html>
